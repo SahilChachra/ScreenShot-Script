@@ -4,22 +4,6 @@
 # Also a basic version of it can be used to take screenshot of you code if you want!
 # Applications are endles!
 
-import os
-import time
-import keyboard
-import pyautogui
-
-def setDestination():
-    print("Enter destination for storing Screenshots in format C:/Users/XYZ/Downloads.. (Windows) ")
-    while True:
-        try: 
-            dir = input("Destination : ")
-            os.chdir(dir)
-            return
-        except:
-            print("Enter valid Destination")
-
-
 #++++++++++++++++++++
 #----------TO ADD---------
 # Fix - Exiting program
@@ -39,6 +23,22 @@ def setDestination():
 
 # - THE PYTHON SCRIPT SHOULD BE RUNNING IN BACKGROUND TO DO IT'S WORK PEACEFULLY!
 
+
+import os
+import time
+import keyboard
+import pyautogui
+
+
+def setDestination():
+    print("Enter destination for storing Screenshots in format C:/Users/XYZ/Downloads.. (Windows) ")
+    while True:
+        try: 
+            desti = input("Destination : ")
+            os.chdir(desti)
+            return desti
+        except:
+            print("Enter valid Destination")
 
 # Creating settings (default/user defined)
 def setKeyCombination():
@@ -69,12 +69,12 @@ def timelapse():
         #timelapseDelay = 4
         if keyboard.is_pressed(keyToStartTimelapse): #The keycombination should be such that you don't press it by mistake!
             while True:
-                #if keyboard.is_pressed("shift + q"):
-                #break
+                if keyboard.is_pressed("shift + q"):
+                    break
                 ss = pyautogui.screenshot()
                 currTime = time.asctime(time.localtime()).replace(" ","-").replace(":","+")
                 #Replacing ' : ' with ' + ' as ' : ' is invalid char in file name 
-                dest = dir + currTime + '.png'
+                dest = desti + currTime + '.png'
                 ss.save(dest)
                 dest = "" #Clearning dest variable
                 time.sleep(timelapseDelay) #creating delay between two shots
@@ -87,7 +87,7 @@ def singleShots():
         if keyboard.is_pressed(keyToTakeSingleShot): # To trigger single shots
             ss = pyautogui.screenshot()
             currTime = time.asctime(time.localtime()).replace(" ","-").replace(":","+")
-            dest = dir + currTime + '.png'
+            dest = desti + currTime + '.png'
             ss.save(dest)
             dest = ""
         elif keyboard.is_pressed(keyToEndSingleShot):
@@ -95,8 +95,8 @@ def singleShots():
 
 #Driving Function calls
 while True:
-    global dir
-    setDestination()
+    
+    desti = setDestination()
     print("1. Time Lapse\n2. Single Shots\n3. Exit\n")
     choice = int(input("Enter Choice : "))
 
@@ -107,6 +107,7 @@ while True:
     elif(choice == 2):
         setKeyCombination()
         singleShots()
+        quit()
     elif(choice == 3):
         quit()
     else:
