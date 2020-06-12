@@ -9,17 +9,63 @@ import time
 import keyboard
 import pyautogui
 
-#dir = input("Enter location to save the pictures : ")
+print("Enter destination for storing Screenshots in format C:/Users/XYZ/Downloads.. (Windows) ")
+dir = input("Destination : ")
+
+#++++++++++++++++++++
+
+# Fix - Exiting program
+# Add - Option to take snapshots for timelapse or for other purpose*
+# 
+
+#+++++++++++++++++++++++
+
+# FOR TIMELAPSE PURPOSE
+def timelapse():
+    while True:
+        if keyboard.is_pressed("shift + space"): #The keycombination should be such that you don't press it by mistake!
+            while True:
+                #if keyboard.is_pressed("shift + q"):
+                #    break
+                ss = pyautogui.screenshot()
+                currTime = time.asctime(time.localtime())
+                currTime = currTime.replace(" ","-").replace(":","+") #Replacing : with + as : is invalid in file name 
+                dest = dir + currTime + '.png'
+                ss.save(dest)
+                dest = ""
+                time.sleep(5)
+            break
+        quit()
+
+# FOR TAKING SNAPSHOTS IF REQ
+#The above part takes screenshot at given interval of Time
+#Now, if you want to take ss of anything on your screen, you have to press PrintScreen button and then paste that image in MSPAINT in Windows!
+# So to avoid this, we can make the usage more Dynamic
+
+def singleShots():
+    while True:
+        if keyboard.is_pressed("shift + alt"): # To trigger single shots
+            ss = pyautogui.screenshot()
+            currTime = time.asctime(time.localtime()).replace(" ","-").replace(":","+")
+            dest = dir + currTime + '.png'
+            ss.save(dest)
+            dest = ""
+        elif keyboard.is_pressed("shift + `"):
+            break
 
 while True:
-    if keyboard.is_pressed("shift + space"): #The keycombination should be such that you don't press it by mistake!
-        while True:
-            #if keyboard.is_pressed("shift + q"):
-            #    break
-            ss = pyautogui.screenshot()
-            currTime = time.asctime(time.localtime())
-            currTime = currTime.replace(" ","-").replace(":","+")
-            currTime = currTime + '.png'
-            ss.save(currTime)
-            time.sleep(5)
-        break
+    print("1. Time Lapse\n2. Single Shots\n3. Exit\n")
+    choice = int(input("Enter Choice : "))
+
+    if(choice == 1):
+        timelapse()
+        #quit()
+    elif(choice == 2):
+        singleShots()
+        #quit()
+    elif(choice == 3):
+        quit()
+    else:
+        print("Invalid Choice!\n")
+
+
