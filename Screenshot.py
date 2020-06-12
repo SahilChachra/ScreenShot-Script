@@ -9,8 +9,16 @@ import time
 import keyboard
 import pyautogui
 
-print("Enter destination for storing Screenshots in format C:/Users/XYZ/Downloads.. (Windows) ")
-dir = input("Destination : ")
+def setDestination():
+    print("Enter destination for storing Screenshots in format C:/Users/XYZ/Downloads.. (Windows) ")
+    while True:
+        try: 
+            dir = input("Destination : ")
+            os.chdir(dir)
+            return
+        except:
+            print("Enter valid Destination")
+
 
 #++++++++++++++++++++
 #----------TO ADD---------
@@ -27,11 +35,12 @@ dir = input("Destination : ")
 # 4. Name of file is current Date-Time to easily sort data for editing purpose
 # 5. User has the option to either use their own settings or default settings
 # 6. User can set custom time interval for taking timelapse
+# 7. Checks given destination is valid or not
 
 # - THE PYTHON SCRIPT SHOULD BE RUNNING IN BACKGROUND TO DO IT'S WORK PEACEFULLY!
 
-# Creating settings (default/user defined)
 
+# Creating settings (default/user defined)
 def setKeyCombination():
     global keyToStartTimelapse, keyToEndTimelapse, keyToTakeSingleShot, keyToEndSingleShot
     print("Do you want to use Default key combinations or Set your own?")
@@ -72,6 +81,7 @@ def timelapse():
             break
         #quit()
 
+#For single shots
 def singleShots():
     while True:
         if keyboard.is_pressed(keyToTakeSingleShot): # To trigger single shots
@@ -83,8 +93,10 @@ def singleShots():
         elif keyboard.is_pressed(keyToEndSingleShot):
             break
 
+#Driving Function calls
 while True:
-    
+    global dir
+    setDestination()
     print("1. Time Lapse\n2. Single Shots\n3. Exit\n")
     choice = int(input("Enter Choice : "))
 
@@ -99,6 +111,3 @@ while True:
         quit()
     else:
         print("Invalid Choice!\n")
-
-
-
