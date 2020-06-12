@@ -13,12 +13,23 @@ print("Enter destination for storing Screenshots in format C:/Users/XYZ/Download
 dir = input("Destination : ")
 
 #++++++++++++++++++++
-
+#----------TO ADD---------
 # Fix - Exiting program
-# Add - Option to take snapshots for timelapse or for other purpose*
-# 
+# Add - option to given user defined key combinations or else user pre defined key combinations
+# Add - cutom time interval
 
 #+++++++++++++++++++++++
+
+#***********************
+#-------------FEATURES------------
+
+# 1. Can take screenshot at given interval of time
+# 2. Can take Single Shots and save directly instead explicitly opening another app to save it
+# 3. Can store data in user defined directory
+# 4. Name of file is current Date-Time to easily sort data for editing purpose
+# 5. 
+
+# - THE PYTHON SCRIPT SHOULD BE RUNNING IN BACKGROUND TO DO IT'S WORK PEACEFULLY!
 
 # FOR TIMELAPSE PURPOSE
 def timelapse():
@@ -26,10 +37,10 @@ def timelapse():
         if keyboard.is_pressed("shift + space"): #The keycombination should be such that you don't press it by mistake!
             while True:
                 #if keyboard.is_pressed("shift + q"):
-                #    break
+                #break
                 ss = pyautogui.screenshot()
-                currTime = time.asctime(time.localtime())
-                currTime = currTime.replace(" ","-").replace(":","+") #Replacing : with + as : is invalid in file name 
+                currTime = time.asctime(time.localtime().replace(" ","-").replace(":","+"))
+                #Replacing ' : ' with ' + ' as ' : ' is invalid char in file name 
                 dest = dir + currTime + '.png'
                 ss.save(dest)
                 dest = ""
@@ -62,7 +73,6 @@ while True:
         #quit()
     elif(choice == 2):
         singleShots()
-        #quit()
     elif(choice == 3):
         quit()
     else:
