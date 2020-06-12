@@ -39,7 +39,7 @@ def setKeyCombination():
     while True:
         if(keyChoice == 0):
             keyToStartTimelapse =  "shift + space"
-            keyToEndTimelapse = "" #NOT IMPLEMENTED YET
+            keyToEndTimelapse = "shift + ctrl" #NOT IMPLEMENTED YET
             keyToTakeSingleShot = "shift + alt"
             keyToEndSingleShot = "shift + `"
             break
@@ -55,26 +55,22 @@ def setKeyCombination():
 
 # FOR TIMELAPSE PURPOSE
 def timelapse():
+    timelapseDelay = int(input("Enter delay between two Screenshot : "))
     while True:
-        timelapseDelay = int(input("Enter delay between two Screenshot : "))
+        #timelapseDelay = 4
         if keyboard.is_pressed(keyToStartTimelapse): #The keycombination should be such that you don't press it by mistake!
             while True:
                 #if keyboard.is_pressed("shift + q"):
                 #break
                 ss = pyautogui.screenshot()
-                currTime = time.asctime(time.localtime().replace(" ","-").replace(":","+"))
+                currTime = time.asctime(time.localtime()).replace(" ","-").replace(":","+")
                 #Replacing ' : ' with ' + ' as ' : ' is invalid char in file name 
                 dest = dir + currTime + '.png'
                 ss.save(dest)
-                dest = ""
-                time.sleep(timelapseDelay)
+                dest = "" #Clearning dest variable
+                time.sleep(timelapseDelay) #creating delay between two shots
             break
-        quit()
-
-# FOR TAKING SNAPSHOTS IF REQ
-#The above part takes screenshot at given interval of Time
-#Now, if you want to take ss of anything on your screen, you have to press PrintScreen button and then paste that image in MSPAINT in Windows!
-# So to avoid this, we can make the usage more Dynamic
+        #quit()
 
 def singleShots():
     while True:
