@@ -21,7 +21,7 @@
 # 6. User can set custom time interval for taking timelapse
 # 7. Checks given destination is valid or not
 
-# - THE PYTHON SCRIPT SHOULD BE RUNNING IN BACKGROUND TO DO IT'S WORK PEACEFULLY!
+# - THIS PYTHON SCRIPT SHOULD BE RUNNING IN BACKGROUND TO DO IT'S WORK PEACEFULLY!
 
 
 import os
@@ -69,14 +69,14 @@ def timelapse():
         #timelapseDelay = 4
         if keyboard.is_pressed(keyToStartTimelapse): #The keycombination should be such that you don't press it by mistake!
             while True:
-                if keyboard.is_pressed("shift + q"):
-                    break
                 ss = pyautogui.screenshot()
                 currTime = time.asctime(time.localtime()).replace(" ","-").replace(":","+")
                 #Replacing ' : ' with ' + ' as ' : ' is invalid char in file name 
                 dest = desti + currTime + '.png'
                 ss.save(dest)
                 dest = "" #Clearning dest variable
+               #if keyboard.is_pressed(keyToEndTimelapse):
+               #    quit()
                 time.sleep(timelapseDelay) #creating delay between two shots
             break
         #quit()
