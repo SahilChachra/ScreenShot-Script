@@ -25,6 +25,11 @@ def setKeyCombination():
             keyToEndTimelapse = "shift + ctrl" #NOT IMPLEMENTED YET
             keyToTakeSingleShot = "shift + alt"
             keyToEndSingleShot = "shift + `"
+
+            print("To start timelapse, Press : Shift + space\n")
+            print("To end timelapse, Press : Shift + ctrl\n")
+            print("To start Single Shot, Press : Shift + alt\n")
+            print("To end Single Shot, Press : Shift + `\n")
             break
         elif(keyChoice == 1):
             keyToStartTimelapse = input("Enter key combination to START Timelapse Shots : ")
@@ -38,6 +43,7 @@ def setKeyCombination():
 
 # FOR TIMELAPSE PURPOSE
 def timelapse():
+    print("WARNING --- TO EXIT TIMELAPSE PRESS CTRL + C IN TERMINAL. KEY COMBINATION TO QUIT IS BEING FIXED")
     timelapseDelay = int(input("Enter delay between two Screenshot : "))
     while True:
         #timelapseDelay = 4
