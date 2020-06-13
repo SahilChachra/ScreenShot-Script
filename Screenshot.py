@@ -74,9 +74,9 @@ def singleShots():
             break
 
 #Driving Function calls
+desti = setDestination()
 while True:
     
-    desti = setDestination()
     print("1. Time Lapse\n2. Single Shots\n3. Exit\n")
     choice = int(input("Enter Choice : "))
 
