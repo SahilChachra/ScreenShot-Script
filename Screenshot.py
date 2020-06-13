@@ -1,29 +1,3 @@
-# This program is expected to take screenshot after every given interval of time
-# This program can be stopped by pressing a key combination
-# This can be used to make a timelapse while you code something
-# Also a basic version of it can be used to take screenshot of you code if you want!
-# Applications are endles!
-
-#++++++++++++++++++++
-#----------TO ADD---------
-# Fix - Exiting program
-
-#+++++++++++++++++++++++
-
-#***********************
-#-------------FEATURES------------
-
-# 1. Can take screenshot at given interval of time
-# 2. Can take Single Shots and save directly instead explicitly opening another app to save it
-# 3. Can store data in user defined directory
-# 4. Name of file is current Date-Time to easily sort data for editing purpose
-# 5. User has the option to either use their own settings or default settings
-# 6. User can set custom time interval for taking timelapse
-# 7. Checks given destination is valid or not
-
-# - THIS PYTHON SCRIPT SHOULD BE RUNNING IN BACKGROUND TO DO IT'S WORK PEACEFULLY!
-
-
 import os
 import time
 import keyboard
