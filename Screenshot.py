@@ -7,12 +7,13 @@ import pyautogui
 def setDestination():
     print("Enter destination for storing Screenshots in format C:/Users/XYZ/Downloads.. (Windows) ")
     while True:
-        try: 
+        try:
             desti = input("Destination : ")
             os.chdir(desti)
             return desti
         except:
             print("Enter valid Destination")
+
 
 # Creating settings (default/user defined)
 def setKeyCombination():
@@ -20,9 +21,9 @@ def setKeyCombination():
     print("Do you want to use Default key combinations or Set your own?")
     keyChoice = int(input("Enter 0 for DEFAULT and 1 for CUSTOM : "))
     while True:
-        if(keyChoice == 0):
-            keyToStartTimelapse =  "shift + space"
-            keyToEndTimelapse = "shift + ctrl" #NOT IMPLEMENTED YET
+        if (keyChoice == 0):
+            keyToStartTimelapse = "shift + space"
+            keyToEndTimelapse = "shift + ctrl"  # NOT IMPLEMENTED YET
             keyToTakeSingleShot = "shift + alt"
             keyToEndSingleShot = "shift + `"
 
@@ -31,7 +32,7 @@ def setKeyCombination():
             print("To start Single Shot, Press : Shift + alt\n")
             print("To end Single Shot, Press : Shift + `\n")
             break
-        elif(keyChoice == 1):
+        elif (keyChoice == 1):
             keyToStartTimelapse = input("Enter key combination to START Timelapse Shots : ")
             keyToEndTimelapse = input("Enter key combination to END Timelapse Shots (YET TO BE IMPLEMENTED): ")
             keyToTakeSingleShot = input("Enter key combination to START Single Shots : ")
@@ -46,49 +47,53 @@ def timelapse():
     print("WARNING --- TO EXIT TIMELAPSE PRESS CTRL + C IN TERMINAL. KEY COMBINATION TO QUIT IS BEING FIXED")
     timelapseDelay = int(input("Enter delay between two Screenshot : "))
     while True:
-        #timelapseDelay = 4
-        if keyboard.is_pressed(keyToStartTimelapse): #The keycombination should be such that you don't press it by mistake!
+        # timelapseDelay = 4
+        if keyboard.is_pressed(
+                keyToStartTimelapse):  # The keycombination should be such that you don't press it by mistake!
             while True:
                 ss = pyautogui.screenshot()
-                currTime = time.asctime(time.localtime()).replace(" ","-").replace(":","+")
-                #Replacing ' : ' with ' + ' as ' : ' is invalid char in file name 
+                currTime = time.asctime(time.localtime()).replace(" ", "-").replace(":", "+")
+                # Replacing ' : ' with ' + ' as ' : ' is invalid char in file name
                 dest = desti + currTime + '.png'
                 ss.save(dest)
-                dest = "" #Clearning dest variable
-               #if keyboard.is_pressed(keyToEndTimelapse):
-               #    quit()
-                time.sleep(timelapseDelay) #creating delay between two shots
+                dest = ""  # Clearning dest variable
+                # if keyboard.is_pressed(keyToEndTimelapse):
+                #    quit()
+                time.sleep(timelapseDelay)  # creating delay between two shots
             break
-        #quit()
+        # quit()
 
-#For single shots
+
+# For single shots
 def singleShots():
     while True:
-        if keyboard.is_pressed(keyToTakeSingleShot): # To trigger single shots
+        if keyboard.is_pressed(keyToTakeSingleShot):  # To trigger single shots
             ss = pyautogui.screenshot()
-            currTime = time.asctime(time.localtime()).replace(" ","-").replace(":","+")
+            currTime = time.asctime(time.localtime()).replace(" ", "-").replace(":", "+")
             dest = desti + currTime + '.png'
             ss.save(dest)
             dest = ""
         elif keyboard.is_pressed(keyToEndSingleShot):
             break
 
-#Driving Function calls
-desti = setDestination()
-while True:
-    
-    print("1. Time Lapse\n2. Single Shots\n3. Exit\n")
-    choice = int(input("Enter Choice : "))
 
-    if(choice == 1):
-        setKeyCombination()
-        timelapse()
-        #quit()
-    elif(choice == 2):
-        setKeyCombination()
-        singleShots()
-        quit()
-    elif(choice == 3):
-        quit()
-    else:
-        print("Invalid Choice!\n")
+if __name__ == '__main__':
+    # Driving Function calls
+    desti = setDestination()
+    while True:
+
+        print("1. Time Lapse\n2. Single Shots\n3. Exit\n")
+        choice = int(input("Enter Choice : "))
+
+        if (choice == 1):
+            setKeyCombination()
+            timelapse()
+            # quit()
+        elif (choice == 2):
+            setKeyCombination()
+            singleShots()
+            quit()
+        elif (choice == 3):
+            quit()
+        else:
+            print("Invalid Choice!\n")
