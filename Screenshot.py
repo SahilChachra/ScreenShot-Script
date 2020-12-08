@@ -38,7 +38,7 @@ def setKeyCombinationTimeLapse():
 
 
 def setKeyCombinationSingleShots():
-    global keyToTakeSingleShot, keyToEndSingleShot
+    global keyToTakeSingleShot
     print("Do you want to use Default key combinations or Set your own?")
     keyChoice = int(input("Enter 0 for DEFAULT and 1 for CUSTOM : "))
     while True:
@@ -81,14 +81,15 @@ def timelapse():
 
 # For single shots
 def singleShots():
+    global keyToTakeSingleShot
     while True:
         if keyboard.is_pressed(keyToTakeSingleShot):  # To trigger single shots
             ss = pyautogui.screenshot()
             currTime = time.asctime(time.localtime()).replace(" ", "-").replace(":", "+")
             dest = desti + currTime + '.png'
             ss.save(dest)
-        elif keyboard.is_pressed(keyToEndSingleShot):
-            break
+        #elif keyboard.is_pressed(keyToEndSingleShot):
+          #  break
 
 
 if __name__ == '__main__':
